@@ -7,18 +7,19 @@ export interface SearchBarProps {
 
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
 
-
   const handleAction = (formData: FormData) => {
-    const queryValue = formData.get("query");
-    const query = typeof queryValue === "string" ? queryValue.trim() : "";
+  const value = formData.get("query");
+  const query = typeof value === "string" ? value.trim() : "";
 
-    if (!query) {
-      toast("Please enter your search query.");
-      return;
-    }
+  if (!query) {
+    toast("Please enter your search query.");
+    return;   
+  }
 
-    onSubmit(query);
-  };
+  onSubmit(query); 
+  return;            
+};
+
 
   return (
     <header className={styles.header}>
@@ -32,14 +33,13 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
           Powered by TMDB
         </a>
 
-        {}
         <form className={styles.form} action={handleAction}>
           <input
             className={styles.input}
             type="text"
             name="query"
-            autoComplete="off"
             placeholder="Search movies..."
+            autoComplete="off"
             autoFocus
           />
           <button className={styles.button} type="submit">
